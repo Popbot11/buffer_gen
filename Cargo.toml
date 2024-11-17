@@ -1,0 +1,8 @@
+[package]
+name = "buffer_gen"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hound = "3.5.1"
+iced = "0.13.1"
