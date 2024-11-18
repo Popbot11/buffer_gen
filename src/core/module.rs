@@ -14,10 +14,9 @@ pub trait Module{
 }
 
 
-//into passed up the recursive chain of modules
-//each 
-pub struct ModuleInfo{
-    mdl_cache: HashMap<String, Box<dyn Module>>,
-    buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>,
-    iter: usize //to be used once I implement multi-rendering to 
+//iter passes up the recursive chain of modules
+pub struct ModuleInfo<'a>{
+    pub mdl_cache: &'a HashMap<String, Box<dyn Module>>,
+    pub buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>,
+    pub iter: usize //to be used once I implement multi-rendering to 
 }

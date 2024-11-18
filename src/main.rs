@@ -1,18 +1,29 @@
 mod core;
 mod modules;
-use core::{module::Module, sample::Sample};
+use core::{module::{Module, ModuleInfo}, sample::Sample};
 use std::{cell::RefCell, collections::HashMap, rc::Rc};
 
-use modules::{buffer::Buffer, gain::Gain, param::Param, render::Render};
+use modules::{buffer::{self, Buffer}, gain::Gain, param::Param, render::Render};
 
-fn go(renderer: String, mdl_cache: &mut HashMap<String, Box<dyn Module>>, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> () {
-    mdl_cache[&renderer].tick_sample(mdl_cache, 0); //i does nothing here
-    // Sample::new(signal.i, signal.val)
+// fn go(renderer: String, mdl_cache: &mut HashMap<String, Box<dyn Module>>, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> () {
+//     mdl_cache[&renderer].tick_sample(mdl_cache, 0); //i does nothing here
+//     // Sample::new(signal.i, signal.val)
+// }
+
+fn go(renderer: String, mdl_cache: &mut HashMap<String, Box<dyn Module>>, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>){
+    
+    let mut info: ModuleInfo = ModuleInfo{
+        mdl_cache: mdl_cache,
+        buff_cache: buff_cache,
+        iter: 0
+    };
+
+    info.mdl_cache[&renderer].tick_sample(&info.mdl_cache, 0);
+
 }
-
 fn main() {
     // let test: Sample = Sample::new(0, 0.0);
-    //test
+
     // let mut 
     let mut buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>> = Rc::new(RefCell::new(HashMap::new()));
     let mut module_cache:HashMap<String, Box<dyn Module>> = HashMap::new();
