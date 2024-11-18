@@ -1,14 +1,14 @@
 use std::{cell::RefCell, collections::HashMap, rc::Rc};
 use crate::core::{module::Module, sample::Sample};
 
-struct Buffer {
+pub struct Buffer {
     pub signal: String,
     pub name: String,
     pub len: usize,
     pub buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>,
 }
 impl Buffer {
-    fn new(signal: String, name: String, len: usize, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> Box<dyn Module> {
+    pub fn new(signal: String, name: String, len: usize, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> Box<dyn Module> {
         Box::from(Self{
             signal: signal, 
             len: len,

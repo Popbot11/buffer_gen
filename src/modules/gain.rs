@@ -13,7 +13,7 @@ impl Module for Gain {
     }
 }
 impl Gain {
-    fn new(signal: String, gain: String) -> Box<dyn Module> {
+    pub fn new(signal: String, gain: String) -> Box<dyn Module> {
         Box::from(Self{
             signal: signal,
             gain: gain,

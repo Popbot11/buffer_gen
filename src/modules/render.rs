@@ -10,7 +10,7 @@ pub struct Render {
     pub buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>,
 }
 impl Render {
-    fn new(rendered_module: String, buffer_name: String, buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> Box<dyn Module>{
+    pub fn new(rendered_module: String, buffer_name: String, buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> Box<dyn Module>{
         Box::from(Self{
             rendered_module: rendered_module,
             buffer_name: buffer_name,

@@ -11,7 +11,7 @@ impl Module for Param {
     }
 }
 impl Param {
-    fn new(value: f32) -> Box<dyn Module> {
+    pub fn new(value: f32) -> Box<dyn Module> {
         Box::from(Self{
             value: value,
         })

@@ -9,7 +9,7 @@ pub struct Scale {
     pub out_max: String,
 }
 impl Scale{
-    fn new(signal: String, in_min: String, in_max: String, out_min: String, out_max: String) -> Box<dyn Module> {
+    pub fn new(signal: String, in_min: String, in_max: String, out_min: String, out_max: String) -> Box<dyn Module> {
         Box::from(Self{
             signal: signal,
             in_min: in_min,

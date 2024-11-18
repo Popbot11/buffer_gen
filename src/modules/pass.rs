@@ -12,7 +12,7 @@ impl Module for Pass {
     }
 }
 impl Pass{
-    fn new(signal: String) -> Box<dyn Module> {
+    pub fn new(signal: String) -> Box<dyn Module> {
         Box::from(Self{
             signal: signal,
         })
