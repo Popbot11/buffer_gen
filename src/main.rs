@@ -12,10 +12,10 @@ fn go(renderer: String, mdl_cache: &mut HashMap<String, Box<dyn Module>>, buff_c
 
 fn main() {
     // let test: Sample = Sample::new(0, 0.0);
-
+    
     // let mut 
     let mut buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>> = Rc::new(RefCell::new(HashMap::new()));
-    let mut module_cache:HashMap<String, Box<dyn Module>> = HashMap::new();
+    let mut module_cache: HashMap<String, Box<dyn Module>> = HashMap::new();
 
     module_cache.insert("renderer module".to_string(), Render::new("create buffer".to_string(), "audio".to_string(), buffer_cache.clone()));
     module_cache.insert("create buffer".to_string(), Buffer::new("gain".to_string(), "audio".to_string(), 22050, buffer_cache.clone()));

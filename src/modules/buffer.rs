@@ -18,7 +18,7 @@ impl Buffer {
     }
 }
 impl Module for Buffer {
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, i: usize) -> Sample {
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, i:usize) -> Sample {
         let mut buff: Vec<Sample> = Vec::new();
         for i in 0..self.len{
             buff.push(Sample::new(i, mdl_cache[&self.signal].tick_sample(mdl_cache, i).val))
