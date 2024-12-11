@@ -18,6 +18,7 @@ impl Render {
         })
     }
 }
+
 impl Module for Render {
     fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, i: usize) -> Sample {
         mdl_cache[&self.rendered_module].tick_sample(mdl_cache, i); //
@@ -38,5 +39,13 @@ impl Module for Render {
             writer.write_sample((amplitude * s.val) as i16).unwrap();
         }
         return Sample::new(0, 0.0); //just because this needs to return a value. this sample value isn't actually intended to be used in any way. 
+    }
+    
+    // fn create_module(&self, mut mdl_cache: HashMap<String, Box<dyn Module>>) -> HashMap<String, Box<dyn Module>>  {
+    //     todo!()
+    // }
+    
+    fn render_text(&self) -> String {
+        todo!()
     }
 }

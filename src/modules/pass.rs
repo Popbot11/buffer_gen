@@ -10,6 +10,14 @@ impl Module for Pass {
         
         Sample::new(signal.i, signal.val)
     }
+    
+    // fn create_module(&self, mut mdl_cache: HashMap<String, Box<dyn Module>>) -> HashMap<String, Box<dyn Module>>  {
+    //     todo!()
+    // }
+    
+    fn render_text(&self) -> String {
+        todo!()
+    }
 }
 impl Pass{
     pub fn new(signal: String) -> Box<dyn Module> {
@@ -17,4 +25,5 @@ impl Pass{
             signal: signal,
         })
     }
+    
 }

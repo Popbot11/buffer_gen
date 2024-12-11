@@ -11,6 +11,14 @@ impl Module for Gain {
         let gain = mdl_cache[&self.gain].tick_sample(mdl_cache, i);
         Sample::new(signal.i, signal.val * gain.val)
     }
+    
+    // fn create_module(&self, mut mdl_cache: HashMap<String, Box<dyn Module>>) -> HashMap<String, Box<dyn Module>>  {
+    //     todo!()
+    // }
+    
+    fn render_text(&self) -> String {
+        todo!()
+    }
 }
 impl Gain {
     pub fn new(signal: String, gain: String) -> Box<dyn Module> {

@@ -31,4 +31,12 @@ impl Module for Scale {
         };
         output
     }
+    
+    // fn create_module(&self, mut mdl_cache: HashMap<String, Box<dyn Module>>) -> HashMap<String, Box<dyn Module>>  {
+    //     todo!()
+    // }
+    
+    fn render_text(&self) -> String {
+        todo!()
+    }
 }
