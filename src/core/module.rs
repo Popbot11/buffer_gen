@@ -19,7 +19,7 @@ impl std::fmt::Display for dyn Module {
 //struct with info so that i don't have to implement a bunch of stuff each time i want to add a new bit of info to be carried UPWARDS into modules
 //this is actually a pain so nevermind. i'd have to do a bunch of stupid borrowing and at that point its not even worth it. 
 pub struct ModuleInfo{
-    iter: usize, //to be used once I implement multi-rendering to 
+    iter: usize, //to be used once I implement multi-rendering 
     i: usize, // sample index
     spec: WavSpec, //contains info about sample rate, bit depth, channel count, and sample format (int, float)
 }
