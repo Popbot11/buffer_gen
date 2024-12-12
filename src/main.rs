@@ -23,14 +23,8 @@ fn main() {
     module_cache.insert("gain".to_string(), Gain::new("parameter".to_string(), "parameter_two".to_string()));
     module_cache.insert("parameter".to_string(), Param::new(0.5));
     module_cache.insert("parameter_two".to_string(), Param::new(1.0));
-    
-    // let mut edit: bool = true; //temp bool variable that determines if it's in edit mode. cause there's no gui yet you run the code, enter edit mode, render the audio, and then the program quits. 
 
-    // while edit {
-
-    // }
-
-
+    {
     // print!("enter choice: ");
     // let choice: String = read!("{}\n");
     // match choice.trim() {
@@ -46,13 +40,9 @@ fn main() {
     // for i in module_cache.keys() {
     //     println!("{i}");
     // }
+    }   
         
-    
-    // println!("{:?}", module_cache);
-
     go("renderer_module".to_string(), &mut module_cache, buffer_cache);
-    // let thing = _parse_test();
-    // Param::new(0.5).create_module(&module_cache)
 
 }
 
