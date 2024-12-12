@@ -1,4 +1,4 @@
-use std::{any::type_name, collections::HashMap, io::{stdin,stdout,Write}};
+use std::collections::HashMap;
 use crate::core::{module::Module, sample::Sample};
 use text_io::{self, read};
 
