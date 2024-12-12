@@ -61,12 +61,4 @@ impl Module for Buffer {
         self.buff_cache.borrow_mut().insert(self.name.clone(), buff);
         sample
     }
-    
-    // fn create_module(&self, mut mdl_cache: HashMap<String, Box<dyn Module>>) -> HashMap<String, Box<dyn Module>> {
-    //     todo!()
-    // }
-    
-    fn render_text(&self) -> String {
-        todo!()
-    }
 }

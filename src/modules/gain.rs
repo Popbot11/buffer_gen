@@ -14,9 +14,6 @@ impl Module for Gain {
         Sample::new(signal.i, signal.val * gain.val)
     }
     
-    fn render_text(&self) -> String {
-        todo!()
-    }
 }
 impl Gain {
     pub fn new(signal: String, gain: String) -> Box<dyn Module> {

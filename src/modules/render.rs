@@ -47,8 +47,4 @@ impl Module for Render {
         }
         return Sample::new(0, 0.0); //just because this needs to return a value. this sample value isn't actually intended to be used in any way. 
     }
-
-    fn render_text(&self) -> String {
-        todo!()
-    }
 }

@@ -13,10 +13,6 @@ impl Module for Param {
     }
 
     
-    fn render_text(&self) -> String {
-        todo!()
-    }
-    
 }
 impl Param {
     pub fn new(value: f32) -> Box<dyn Module> {

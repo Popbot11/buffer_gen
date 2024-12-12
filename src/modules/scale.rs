@@ -42,8 +42,4 @@ impl Module for Scale {
         };
         output
     }
-    
-    fn render_text(&self) -> String {
-        todo!()
-    }
 }

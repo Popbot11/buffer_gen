@@ -8,16 +8,11 @@ pub trait Module{
     //&self -- the instance of the respective struct that implements tick_sample
     //i: the requested sample index
 
-    // fn create_module(&self, mdl_cache: HashMap<String, Box<dyn Module>>) -> HashMap<String, Box<dyn Module>>;
-    fn render_text(&self) -> String;
 }
 impl std::fmt::Display for dyn Module {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", &self)
     }
-    // fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-    //     write!(f, "{}", &self)
-    // }
 } 
 
 
