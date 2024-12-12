@@ -2,7 +2,7 @@ use std::{cell::RefCell, collections::HashMap, rc::Rc};
 use text_io::read;
 use toml::Value;
 
-use crate::core::{module::Module, sample::Sample};
+use crate::core::{module::{Module, ModuleInfo}, sample::Sample};
 
 pub struct Buffer {
     pub signal: String,
@@ -51,14 +51,20 @@ impl Buffer {
 
 }
 impl Module for Buffer {
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, i:usize) -> Sample {
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
+        // get the name for the buffer; default if theres no reps but if there are reps any names after 0 will have the int appended to the end
+        let name = ModuleInfo::rep_name(info, self.name.clone());
+        
+        // This loop is the primary way that the sample index (i) field in ModuleInfo is incremented. 
         let mut buff: Vec<Sample> = Vec::new();
-        for i in 0..self.len{
-            buff.push(Sample::new(i, mdl_cache[&self.signal].tick_sample(mdl_cache, i).val))
+        for index in 0..self.len{
+            let info = ModuleInfo{i: index, ..info};
+            buff.push(Sample::new(index, mdl_cache[&self.signal].tick_sample(mdl_cache, info).val))
         };
         
-        let sample = Sample::new(i, buff[i].val);
-        self.buff_cache.borrow_mut().insert(self.name.clone(), buff);
-        sample
+        let sample = Sample::new(info.i, buff[info.i].val);
+        self.buff_cache.borrow_mut().insert(name, buff);
+        
+        sample //this currently does nothing; i just need to return a value. 
     }
 }

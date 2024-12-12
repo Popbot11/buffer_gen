@@ -1,8 +1,8 @@
 mod core;
 mod modules;
-use core::{module::Module, sample::Sample};
+use core::{module::{Module, ModuleInfo}, sample::Sample};
 use std::{cell::RefCell, collections::HashMap, fs::File, io::Read, rc::Rc};
-use modules::{buffer::Buffer, gain::Gain, param::Param, pass::Pass, render::Render, _repeat::Repeat, scale::Scale};
+use modules::{buffer::Buffer, gain::Gain, param::Param, pass::Pass, render::Render, repeat::Repeat, scale::Scale};
 use toml::{map::Map, Table, Value};
 
 fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>)-> HashMap<String, Box<dyn Module>>{
@@ -40,8 +40,16 @@ fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashM
 }
 
 fn go(renderer: String, mdl_cache: &HashMap<String, Box<dyn Module>>, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> () {
-    mdl_cache[&renderer].tick_sample(mdl_cache, 0); //i does nothing here
-    // Sample::new(signal.i, signal.val)
+    let spec = hound::WavSpec {
+        channels: 1,
+        sample_rate: 44100,
+        bits_per_sample: 16,
+        sample_format: hound::SampleFormat::Int,
+    };
+
+    let info = ModuleInfo::new(0, 0, spec);
+    
+    mdl_cache[&renderer].tick_sample(mdl_cache, info); //i and rep do nothing here
     println!("fully itterated through module cache")
 }
 

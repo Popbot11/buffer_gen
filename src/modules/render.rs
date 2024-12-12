@@ -1,7 +1,7 @@
 use std::{cell::RefCell, collections::HashMap, rc::Rc};
 use toml::Value;
 
-use crate::core::{module::Module, sample::Sample};
+use crate::core::{module::{Module, ModuleInfo}, sample::Sample};
 
 
 //looks at a buffer that's been pushed to memory, and renders that as a file
@@ -27,16 +27,10 @@ impl Render {
 }
 
 impl Module for Render {
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, i: usize) -> Sample {
-        mdl_cache[&self.rendered_module].tick_sample(mdl_cache, i); //
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
+        mdl_cache[&self.rendered_module].tick_sample(mdl_cache, info); 
 
-        let spec = hound::WavSpec {
-            channels: 1,
-            sample_rate: 44100,
-            bits_per_sample: 16,
-            sample_format: hound::SampleFormat::Int,
-        };
-        let mut writer = hound::WavWriter::create(format!("{}{}","test", ".wav"), spec).unwrap();
+        let mut writer = hound::WavWriter::create(format!("{}{}","test", ".wav"), info.spec).unwrap();
         
         let samples = &self.buffer_cache.borrow_mut()[&self.buffer_name];
         // let mut buffer: Vec<f32> = Vec::new();
