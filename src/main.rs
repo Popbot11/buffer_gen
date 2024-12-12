@@ -39,7 +39,7 @@ fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashM
     cache
 }
 
-fn go(renderer: String, mdl_cache: &HashMap<String, Box<dyn Module>>, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> () {
+fn go(root_module: String, mdl_cache: &HashMap<String, Box<dyn Module>>, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> () {
     let spec = hound::WavSpec {
         channels: 1,
         sample_rate: 44100,
@@ -49,7 +49,7 @@ fn go(renderer: String, mdl_cache: &HashMap<String, Box<dyn Module>>, buff_cache
 
     let info = ModuleInfo::new(0, 0, spec);
     
-    mdl_cache[&renderer].tick_sample(mdl_cache, info); //i and rep do nothing here
+    mdl_cache[&root_module].tick_sample(mdl_cache, info); //i and rep do nothing here
     println!("fully itterated through module cache")
 }
 

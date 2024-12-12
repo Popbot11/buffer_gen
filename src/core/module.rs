@@ -4,10 +4,8 @@ use hound::WavSpec;
 use crate::core::sample::Sample;
 
 pub trait Module{
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample;
     //&self -- the instance of the respective struct that implements tick_sample
-    //i: the requested sample index
-
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample;
 }
 impl std::fmt::Display for dyn Module {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -58,7 +56,6 @@ impl ModuleInfo{
             _ => format!("{}{}", name, self.rep)
         }
     }
-
 }
 
 

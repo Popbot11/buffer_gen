@@ -19,7 +19,6 @@ impl Buffer {
             name: name,
             buff_cache: buff_cache,
         })
-        
     }
 
     pub fn new_entry(params: &Vec<Value>, buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> Box<dyn Module> {
@@ -61,7 +60,7 @@ impl Module for Buffer {
             let info = ModuleInfo{i: index, ..info};
             buff.push(Sample::new(index, mdl_cache[&self.signal].tick_sample(mdl_cache, info).val))
         };
-        
+
         let sample = Sample::new(info.i, buff[info.i].val);
         self.buff_cache.borrow_mut().insert(name, buff);
         
