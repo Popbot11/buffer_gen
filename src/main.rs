@@ -2,7 +2,7 @@ mod core;
 mod modules;
 use core::{module::Module, sample::Sample};
 use std::{cell::RefCell, collections::HashMap, fs::File, io::Read, rc::Rc};
-use modules::{buffer::Buffer, gain::Gain, param::Param, pass::Pass, render::Render, scale::Scale};
+use modules::{buffer::Buffer, gain::Gain, param::Param, pass::Pass, render::Render, _repeat::Repeat, scale::Scale};
 use toml::{map::Map, Table, Value};
 
 fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>)-> HashMap<String, Box<dyn Module>>{
@@ -26,6 +26,7 @@ fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashM
                 "param" => Param::new_entry(params),
                 "pass" => Pass::new_entry(params),
                 "render" => Render::new_entry(params, buffer_cache.clone()),
+                "repeat" => Repeat::new_entry(params),
                 "scale" => Scale::new_entry(params),
                 // "sin" => todo!(),
                 _ => panic!("AAAGAGHH")
@@ -55,8 +56,6 @@ fn main() {
         data.parse::<Table>().unwrap()
     }; 
 
-
-    
     let mut buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>> = Rc::new(RefCell::new(HashMap::new())); 
     let module_cache: HashMap<String, Box<dyn Module>> = toml_to_hashmap(toml_file, buffer_cache.clone());
         
