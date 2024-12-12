@@ -1,3 +1,4 @@
+
 renderer_module = {type = "render", params = ["create_buffer", "audio"]} # buffer_cache inferred
 create_buffer = {type = "buffer", params = ["gain", "audio", 22050]} # buffer_cache inferred
 gain = {type = "gain", params = ["parameter", "parameter_two"]}

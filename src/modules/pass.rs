@@ -1,4 +1,6 @@
 use std::collections::HashMap;
+use toml::Value;
+
 use crate::core::{module::Module, sample::Sample};
 
 pub struct Pass {
@@ -10,10 +12,7 @@ impl Module for Pass {
         
         Sample::new(signal.i, signal.val)
     }
-    
-    // fn create_module(&self, mut mdl_cache: HashMap<String, Box<dyn Module>>) -> HashMap<String, Box<dyn Module>>  {
-    //     todo!()
-    // }
+
     
     fn render_text(&self) -> String {
         todo!()
@@ -21,9 +20,13 @@ impl Module for Pass {
 }
 impl Pass{
     pub fn new(signal: String) -> Box<dyn Module> {
+        println!("created new pass module. signal: {signal} \n");
         Box::from(Self{
             signal: signal,
         })
+    }
+    pub fn new_entry(params: &Vec<Value>) -> Box<dyn Module> {
+        Pass::new(params[0].as_str().unwrap().to_string())
     }
     
 }

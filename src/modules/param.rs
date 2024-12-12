@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use crate::core::{module::Module, sample::Sample};
 use text_io::{self, read};
+use toml::Value;
 
 
 pub struct Param {
@@ -16,18 +17,19 @@ impl Module for Param {
         todo!()
     }
     
-    // fn create_module(&self, mdl_cache: HashMap<String, Box<dyn Module>>) -> HashMap<String, Box<dyn Module>> {
-    //     todo!()
-    // }
 }
 impl Param {
     pub fn new(value: f32) -> Box<dyn Module> {
-        
-        
+        println!("created new param module. value: {value} \n");
         Box::from(Self{
             value: value,
         })
     }
+
+    pub fn new_entry(params: &Vec<Value>) -> Box<dyn Module> {
+        Param::new(params[0].as_float().unwrap() as f32)
+    }
+
     pub fn create_new(mut mdl_cache: HashMap<String, Box<dyn Module>>) -> HashMap<String, Box<dyn Module>> {
 
         print!("enter module name: ");
