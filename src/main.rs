@@ -50,21 +50,3 @@ fn main() {
 
 // TESTS: 
 
-fn _mutate_test(){
-    let mut test_vec: Vec<i32> = Vec::new();
-    // shadow_test(test_vec);
-    for i in 0..5 {
-        println!("{:?}", test_vec);
-        test_vec = _get_thing(test_vec, i);
-    }
-    println!("{:?}", test_vec);
-}
-
-fn _get_thing(mut cache: Vec<i32>, value: i32) -> Vec<i32>{
-    cache.push(value);
-    cache
-}
-
-fn _parse_test() -> f32{
-    "1.0".parse().unwrap()
-}
