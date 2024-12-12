@@ -31,11 +31,11 @@ impl Render {
 impl Module for Render {
     fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
         mdl_cache[&self.rendered_module].tick_sample(mdl_cache, info); 
-        
+        let buffer_name = ModuleInfo::rep_name(info, self.buffer_name.clone());
         let file_name = ModuleInfo::rep_name(info, self.file_name.clone());
         let mut writer = hound::WavWriter::create(format!("{}{}",file_name, ".wav"), info.spec).unwrap();
         
-        let samples = &self.buffer_cache.borrow_mut()[&self.buffer_name];
+        let samples = &self.buffer_cache.borrow_mut()[&buffer_name];
         // let mut buffer: Vec<f32> = Vec::new();
         
         for s in samples {
