@@ -23,30 +23,10 @@ fn main() {
     module_cache.insert("gain".to_string(), Gain::new("parameter".to_string(), "parameter_two".to_string()));
     module_cache.insert("parameter".to_string(), Param::new(0.5));
     module_cache.insert("parameter_two".to_string(), Param::new(1.0));
-
-    {
-    // print!("enter choice: ");
-    // let choice: String = read!("{}\n");
-    // match choice.trim() {
-    //     "Param" => module_cache = Param::create_new(module_cache),
-    //     // "Render" => module_cache = Render::create_new(module_cache),
-    //     "Buffer" => module_cache = Buffer::create_new(module_cache, buffer_cache),
-    //     "exit" => return,
-    //     _ => {
-    //         println!("not an option!");
-    //         return;
-    //     },
-    // }
-    // for i in module_cache.keys() {
-    //     println!("{i}");
-    // }
-    }   
         
     go("renderer_module".to_string(), &mut module_cache, buffer_cache);
 
 }
 
 
-
-// TESTS: 
 
