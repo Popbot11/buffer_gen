@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use crate::core::{module::Module, sample::Sample};
+use crate::core::{module::{Module, ModuleInfo}, sample::Sample};
 use text_io::{self, read};
 use toml::Value;
 
@@ -8,8 +8,8 @@ pub struct Param {
     pub value: f32,
 }
 impl Module for Param {
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, i: usize) -> Sample {
-        Sample::new(i, self.value)
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
+        Sample::new(info.i, self.value)
     }
 
     

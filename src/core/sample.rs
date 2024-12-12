@@ -1,5 +1,6 @@
 use std::fmt;
 
+#[derive(Debug, Clone, Copy)]
 pub struct Sample{
     pub i: usize,
     pub val: f32,

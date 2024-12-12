@@ -1,8 +1,10 @@
 pub mod buffer;
-pub mod gain;
+pub mod multiply;
 pub mod param;
-pub mod _repeat;
+pub mod param_rep;
+pub mod repeat;
 pub mod pass;
 pub mod render;
 pub mod scale;
+pub mod scale_static;
 pub mod sin;

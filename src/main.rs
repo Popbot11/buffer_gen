@@ -1,8 +1,8 @@
 mod core;
 mod modules;
-use core::{module::Module, sample::Sample};
+use core::{module::{Module, ModuleInfo}, sample::Sample};
 use std::{cell::RefCell, collections::HashMap, fs::File, io::Read, rc::Rc};
-use modules::{buffer::Buffer, gain::Gain, param::Param, pass::Pass, render::Render, _repeat::Repeat, scale::Scale};
+use modules::{buffer::Buffer, multiply::Multiply, param::Param, param_rep::ParamRep, pass::Pass, render::Render, repeat::Repeat, scale::Scale, scale_static::ScaleStatic};
 use toml::{map::Map, Table, Value};
 
 fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>)-> HashMap<String, Box<dyn Module>>{
@@ -22,12 +22,14 @@ fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashM
             //entry.1 is the value of each entry, which contains  the module type and the module parameters
             match entry.1["type"].as_str().unwrap() {
                 "buffer" => Buffer::new_entry(params, buffer_cache.clone()),
-                "gain" => Gain::new_entry(params),
+                "multiply" => Multiply::new_entry(params),
                 "param" => Param::new_entry(params),
+                "param_rep" => ParamRep::new_entry(params),
                 "pass" => Pass::new_entry(params),
                 "render" => Render::new_entry(params, buffer_cache.clone()),
                 "repeat" => Repeat::new_entry(params),
                 "scale" => Scale::new_entry(params),
+                "scale_static" => ScaleStatic::new_entry(params),
                 // "sin" => todo!(),
                 _ => panic!("AAAGAGHH")
             }
@@ -39,9 +41,17 @@ fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashM
     cache
 }
 
-fn go(renderer: String, mdl_cache: &HashMap<String, Box<dyn Module>>, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> () {
-    mdl_cache[&renderer].tick_sample(mdl_cache, 0); //i does nothing here
-    // Sample::new(signal.i, signal.val)
+fn go(root_module: String, mdl_cache: &HashMap<String, Box<dyn Module>>, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> () {
+    let spec = hound::WavSpec {
+        channels: 1,
+        sample_rate: 44100,
+        bits_per_sample: 16,
+        sample_format: hound::SampleFormat::Int,
+    };
+
+    let info = ModuleInfo::new(0, 0, spec);
+    
+    mdl_cache[&root_module].tick_sample(mdl_cache, info); //i and rep do nothing here
     println!("fully itterated through module cache")
 }
 
@@ -49,7 +59,7 @@ fn go(renderer: String, mdl_cache: &HashMap<String, Box<dyn Module>>, buff_cache
 fn main() {
     // import toml file
     let toml_file = {
-        let mut file = File::open("testchain.toml").expect("Unable to open file");
+        let mut file = File::open("rep_test.toml").expect("Unable to open file");
         let mut data = String::new();
         file.read_to_string(&mut data).expect("Unable to read string");
         // println!("{}", data);
@@ -59,6 +69,6 @@ fn main() {
     let mut buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>> = Rc::new(RefCell::new(HashMap::new())); 
     let module_cache: HashMap<String, Box<dyn Module>> = toml_to_hashmap(toml_file, buffer_cache.clone());
         
-    go("renderer_module".to_string(), &module_cache, buffer_cache.clone());
+    go("repeater".to_string(), &module_cache, buffer_cache.clone());
 
 }
