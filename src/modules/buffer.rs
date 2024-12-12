@@ -60,7 +60,8 @@ impl Module for Buffer {
             let info = ModuleInfo{i: index, ..info};
             buff.push(Sample::new(index, mdl_cache[&self.signal].tick_sample(mdl_cache, info).val))
         };
-
+        println!("added {} to buffer cache, len: {}", name, buff.len());
+        
         let sample = Sample::new(info.i, buff[info.i].val);
         self.buff_cache.borrow_mut().insert(name, buff);
         

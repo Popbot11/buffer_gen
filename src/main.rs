@@ -57,7 +57,7 @@ fn go(root_module: String, mdl_cache: &HashMap<String, Box<dyn Module>>, buff_ca
 fn main() {
     // import toml file
     let toml_file = {
-        let mut file = File::open("testchain.toml").expect("Unable to open file");
+        let mut file = File::open("rep_test.toml").expect("Unable to open file");
         let mut data = String::new();
         file.read_to_string(&mut data).expect("Unable to read string");
         // println!("{}", data);
@@ -67,6 +67,6 @@ fn main() {
     let mut buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>> = Rc::new(RefCell::new(HashMap::new())); 
     let module_cache: HashMap<String, Box<dyn Module>> = toml_to_hashmap(toml_file, buffer_cache.clone());
         
-    go("renderer_module".to_string(), &module_cache, buffer_cache.clone());
+    go("repeater".to_string(), &module_cache, buffer_cache.clone());
 
 }
