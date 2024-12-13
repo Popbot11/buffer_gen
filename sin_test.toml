@@ -1,4 +1,4 @@
-repeat = {type = "repeat", params = ["render_module", 50]}
+repeat = {type = "repeat", params = ["render_module", 3]}
 render_module = {type = "render", params = ["repeat_test_", "joe_buffer", "audio"]}
 joe_buffer = {type = "buffer", params = ["sin", "audio", 4410]}
 sin = {type = "sine", params = ["freq"]}
