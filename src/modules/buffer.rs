@@ -1,5 +1,4 @@
 use std::{cell::RefCell, collections::HashMap, rc::Rc};
-use text_io::read;
 use toml::Value;
 
 use crate::core::{module::{Module, ModuleInfo}, sample::Sample};
@@ -27,26 +26,6 @@ impl Buffer {
     // dear lord
 
     // unused code for console ui for like. whatever. should probabl get rid of this
-    pub fn create_new(mut mdl_cache: HashMap<String, Box<dyn Module>>, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> HashMap<String, Box<dyn Module>> {
-
-        print!("enter module name: ");
-        let name: String = read!("{}\n");
-
-        print!("enter source signal name: ");
-        let signal: String = read!("{}\n");
-
-        print!("enter buffer name: ");
-        let buff_name: String = read!("{}\n");
-
-        print!("enter buffer length (in samples): ");
-        let len: String = read!("{}\n");
-
-        // println!("test");
-        // println!("Param name: {}, value: {}", name.trim(), value.trim());
-        mdl_cache.insert(name.trim().to_string(), Buffer::new(signal.trim().to_string(), buff_name.trim().to_string(), len.trim().parse().unwrap(), buff_cache));
-
-        mdl_cache
-    }
 
 }
 impl Module for Buffer {

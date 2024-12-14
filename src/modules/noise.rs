@@ -7,7 +7,7 @@ use crate::core::{module::{Module, ModuleInfo}, sample::Sample};
 
 // note for future me: just generates white noise
 pub struct Noise {
-    pub unused: (),
+    pub _unused: (),
 }
 impl Module for Noise {
     fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
@@ -21,7 +21,7 @@ impl Noise{
     pub fn new() -> Box<dyn Module> {
         println!("created new noise module. \n");
         Box::from(Self{
-            unused: (),
+            _unused: (),
         })
     }
     pub fn new_entry(params: &Vec<Value>) -> Box<dyn Module> {

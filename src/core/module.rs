@@ -1,4 +1,4 @@
-use std::{cell::RefCell, collections::HashMap, fmt::{self, Debug, Display}, rc::Rc};
+use std::{collections::HashMap, fmt::{self, Debug}};
 use hound::WavSpec;
 
 use crate::core::sample::Sample;
@@ -20,7 +20,7 @@ impl std::fmt::Display for dyn Module {
 pub struct ModuleInfo{
     pub rep: usize, //to be used once I implement multi-rendering 
     pub i: usize, // sample index
-    pub spec: WavSpec, //contains info about sample rate, bit depth, channel count, and sample format (int, float)
+    pub spec: WavSpec, //contains info about sample rate, bit depth, channel count, and sample format (int, float)S
 }
 impl ModuleInfo{
     pub fn new(rep: usize, i: usize, spec: WavSpec) -> Self {

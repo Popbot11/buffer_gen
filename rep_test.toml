@@ -1,4 +1,4 @@
 repeater = {type = "repeat", params = ["render_module", 2]}
-render_module = {type = "render", params = ["repeat_test_", "joe_buffer", "audio"]}
+render_module = {type = "render", params = ["test_audio_yay", "joe_buffer", "audio"]}
 joe_buffer = {type = "buffer", params = ["static", "audio", 11025]}
 static = {type = "param_rep", params = [0.33]}
