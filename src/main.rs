@@ -2,7 +2,7 @@ mod core;
 mod modules;
 use core::{module::{Module, ModuleInfo}, sample::Sample};
 use std::{cell::RefCell, collections::HashMap, fs::File, io::Read, rc::Rc};
-use modules::{buffer::Buffer, multiply::Multiply, param::Param, param_rep::ParamRep, pass::Pass, render::Render, repeat::Repeat, scale::Scale, scale_static::ScaleStatic, sin::Sine};
+use modules::{buffer::Buffer, multiply::Multiply, noise::Noise, param::Param, param_rep::ParamRep, pass::Pass, render::Render, repeat::Repeat, scale::Scale, scale_static::ScaleStatic, sin::Sine};
 use toml::{map::Map, Table, Value};
 
 fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>)-> HashMap<String, Box<dyn Module>>{
@@ -23,6 +23,7 @@ fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashM
             match entry.1["type"].as_str().unwrap() {
                 "buffer" => Buffer::new_entry(params, buffer_cache.clone()),
                 "multiply" => Multiply::new_entry(params),
+                "noise" => Noise::new_entry(params),
                 "param" => Param::new_entry(params),
                 "param_rep" => ParamRep::new_entry(params),
                 "pass" => Pass::new_entry(params),
@@ -32,7 +33,7 @@ fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashM
                 "scale_static" => ScaleStatic::new_entry(params),
                 "sine" => Sine::new_entry(params),
                 // "sin" => todo!(),
-                _ => panic!("AAAGAGHH")
+                _ => panic!("AAAGAGHH PANIC the meteor")
             }
         };
         cache.insert(name, module);
@@ -72,3 +73,4 @@ fn main() {
     go("repeat".to_string(), &module_cache, buffer_cache.clone());
 
 }
+

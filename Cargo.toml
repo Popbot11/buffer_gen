@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 hound = "3.5.1"
+rand = "0.8.5"
 text_io = "0.1.12"
 toml = "0.8.19"
 toml_edit = "0.22.22"

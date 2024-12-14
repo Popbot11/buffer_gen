@@ -5,23 +5,26 @@ use toml::Value;
 
 
 pub struct ParamRep {
-    pub scale_factor: f32,
+    pub starting_value: f32,
+    pub increment: f32,
 }
 impl Module for ParamRep {
     fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
-        Sample::new(info.i, self.scale_factor * (info.rep + 1) as f32)
+        Sample::new(info.i, self.starting_value + (self.increment * (info.rep) as f32))
         // + 1 cause rep i zero-based
     }
 }
+
 impl ParamRep {
-    pub fn new(scale_factor: f32) -> Box<dyn Module> {
-        println!("created new param_rep module. scale_factor: {scale_factor} \n");
+    pub fn new(starting_value: f32, increment: f32) -> Box<dyn Module> {
+        println!("created new param_rep module. starting_value: {starting_value}, increment: {increment} \n");
         Box::from(Self{
-            scale_factor: scale_factor,
+            starting_value: starting_value,
+            increment: increment,
         })
     }
 
     pub fn new_entry(params: &Vec<Value>) -> Box<dyn Module> {
-        ParamRep::new(params[0].as_float().unwrap() as f32)
+        ParamRep::new(params[0].as_float().unwrap() as f32, params[1].as_float().unwrap() as f32)
     }
 }

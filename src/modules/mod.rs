@@ -8,3 +8,4 @@ pub mod render;
 pub mod scale;
 pub mod scale_static;
 pub mod sin;
+pub mod noise;
