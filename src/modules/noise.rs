@@ -12,7 +12,7 @@ pub struct Noise {
 impl Module for Noise {
     fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
         let mut rng = rand::thread_rng();
-
+        
         
         Sample::new(info.i, (rng.gen::<f32>() * 2.0) - 1.0)
     }

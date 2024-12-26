@@ -7,5 +7,6 @@ pub mod pass;
 pub mod render;
 pub mod scale;
 pub mod scale_static;
+pub mod simplest_lpf;
 pub mod sin;
 pub mod noise;

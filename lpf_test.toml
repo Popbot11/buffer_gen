@@ -1,0 +1,11 @@
+repeat = {type = "repeat", params = ["render_module", 1]}
+render_module = {type = "render", params = ["repeat_test_", "joe_buffer", "audio"]}
+joe_buffer = {type = "buffer", params = ["filter", "audio", 4410]}
+
+filter = {type = "simplest_lpf", params = ["sine"]}
+
+noise = {type = "noise", params = []}
+static = {type = "param", params = [1.0]}
+sine = {type = "sine", params = ["nyquist"]}
+
+nyquist = {type = "param", params = [11025.0]}

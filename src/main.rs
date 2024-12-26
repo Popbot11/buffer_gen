@@ -2,7 +2,7 @@ mod core;
 mod modules;
 use core::{module::{Module, ModuleInfo}, sample::Sample};
 use std::{cell::RefCell, collections::HashMap, fs::File, io::Read, rc::Rc};
-use modules::{buffer::Buffer, multiply::Multiply, noise::Noise, param::Param, param_rep::ParamRep, pass::Pass, render::Render, repeat::Repeat, scale::Scale, scale_static::ScaleStatic, sin::Sine};
+use modules::{buffer::Buffer, multiply::Multiply, noise::Noise, param::Param, param_rep::ParamRep, pass::Pass, render::Render, repeat::Repeat, scale::Scale, scale_static::ScaleStatic, simplest_lpf::SimplestLPF, sin::Sine};
 use toml::{map::Map, Table, Value};
 
 fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>)-> HashMap<String, Box<dyn Module>>{
@@ -31,6 +31,7 @@ fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashM
                 "repeat" => Repeat::new_entry(params),
                 "scale" => Scale::new_entry(params),
                 "scale_static" => ScaleStatic::new_entry(params),
+                "simplest_lpf" => SimplestLPF::new_entry(params, name.clone(), buffer_cache.clone()),
                 "sine" => Sine::new_entry(params),
                 // "sin" => todo!(),
                 _ => panic!("AAAGAGHH PANIC the meteor")
@@ -61,7 +62,7 @@ fn go(root_module: String, mdl_cache: &HashMap<String, Box<dyn Module>>, buff_ca
 fn main() {
     // import toml file
     let toml_file = {
-        let mut file = File::open("sin_test.toml").expect("Unable to open file");
+        let mut file = File::open("lpf_test.toml").expect("Unable to open file");
         let mut data = String::new();
         file.read_to_string(&mut data).expect("Unable to read string");
         // println!("{}", data);
