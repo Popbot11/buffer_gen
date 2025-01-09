@@ -8,13 +8,13 @@ pub struct Repeat {
     pub repetitions: usize,
 }
 impl Module for Repeat {
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> f32 {
         for r in 0..self.repetitions {
             let info = ModuleInfo{rep: r, ..info};
-            let signal: Sample = mdl_cache[&self.signal].tick_sample(mdl_cache, info);
+            let signal = mdl_cache[&self.signal].tick_sample(mdl_cache, info);
         }
         
-        Sample::new(0, 0.0) //repeat isn't meant to return sample values; it works on modules such as Buffer and Render that also don't output samples
+        0.0 //repeat isn't meant to return sample values; it works on modules such as Buffer and Render that also don't output samples
     }
 
 }

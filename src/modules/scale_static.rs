@@ -31,14 +31,14 @@ impl ScaleStatic{
     }
 }
 impl Module for ScaleStatic {
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
-        let output: Sample = {
-            let signal = mdl_cache[&self.signal].tick_sample(mdl_cache, info).val; 
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> f32 {
+        let output = {
+            let signal = mdl_cache[&self.signal].tick_sample(mdl_cache, info); 
             let in_min = &self.in_min;
             let in_max = &self.in_max;
             let out_min = &self.out_min;
             let out_max = &self.out_max;
-            Sample::new(info.i, (signal - in_min)*((out_max-out_min)/(in_max-in_min)) + out_min)
+            (signal - in_min)*((out_max-out_min)/(in_max-in_min)) + out_min
         };
         output
     }

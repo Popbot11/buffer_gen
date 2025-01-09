@@ -7,10 +7,8 @@ pub struct Pass {
     pub signal: String,
 }
 impl Module for Pass {
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
-        let signal: Sample = mdl_cache[&self.signal].tick_sample(mdl_cache, info);
-        
-        Sample::new(signal.i, signal.val)
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> f32 {
+        mdl_cache[&self.signal].tick_sample(mdl_cache, info)
     }
 }
 impl Pass{

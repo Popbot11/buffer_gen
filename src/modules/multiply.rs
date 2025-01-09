@@ -8,10 +8,10 @@ pub struct Multiply {
     pub signal_b: String,
 }
 impl Module for Multiply {
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> f32 {
         let signal_a = mdl_cache[&self.signal_a].tick_sample(mdl_cache, info);
         let signal_b = mdl_cache[&self.signal_b].tick_sample(mdl_cache, info);
-        Sample::new(signal_a.i, signal_a.val * signal_b.val)
+        signal_a * signal_b
     }
     
 }

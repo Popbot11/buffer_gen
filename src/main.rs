@@ -5,7 +5,7 @@ use std::{cell::RefCell, collections::HashMap, fs::File, io::Read, rc::Rc};
 use modules::{buffer::Buffer, multiply::Multiply, noise::Noise, param::Param, param_rep::ParamRep, pass::Pass, render::Render, repeat::Repeat, scale::Scale, scale_static::ScaleStatic, simplest_lpf::SimplestLPF, sin::Sine};
 use toml::{map::Map, Table, Value};
 
-fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>)-> HashMap<String, Box<dyn Module>>{
+fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashMap<String, Vec<f32>>>>)-> HashMap<String, Box<dyn Module>>{
     let mut cache: HashMap<String, Box<dyn Module>> = HashMap::new();
 
     for entry in toml_file {
@@ -44,7 +44,7 @@ fn toml_to_hashmap(toml_file: Map<String, Value>, buffer_cache: Rc<RefCell<HashM
     cache
 }
 
-fn go(root_module: String, mdl_cache: &HashMap<String, Box<dyn Module>>, buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> () {
+fn go(root_module: String, mdl_cache: &HashMap<String, Box<dyn Module>>, buff_cache: Rc<RefCell<HashMap<String, Vec<f32>>>>) -> () {
     let spec = hound::WavSpec {
         channels: 1,
         sample_rate: 44100,
@@ -68,7 +68,7 @@ fn main() {
         // println!("{}", data);
         data.parse::<Table>().unwrap()
     }; 
-    let buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>> = Rc::new(RefCell::new(HashMap::new())); 
+    let buffer_cache: Rc<RefCell<HashMap<String, Vec<f32>>>> = Rc::new(RefCell::new(HashMap::new())); 
     let module_cache: HashMap<String, Box<dyn Module>> = toml_to_hashmap(toml_file, buffer_cache.clone());
         
     go("repeat".to_string(), &module_cache, buffer_cache.clone());

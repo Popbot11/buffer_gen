@@ -10,10 +10,10 @@ pub struct Render {
     pub file_name: String,
     pub rendered_module: String,
     pub buffer_name: String,
-    pub buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>,
+    pub buffer_cache: Rc<RefCell<HashMap<String, Vec<f32>>>>,
 }
 impl Render {
-    pub fn new(file_name: String, rendered_module: String, buffer_name: String, buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> Box<dyn Module>{
+    pub fn new(file_name: String, rendered_module: String, buffer_name: String, buffer_cache: Rc<RefCell<HashMap<String, Vec<f32>>>>) -> Box<dyn Module>{
         println!("created new render module. rendered_module: {rendered_module}, buffer_name: {buffer_name}\n");
         Box::from(Self{
             file_name: file_name,
@@ -23,13 +23,13 @@ impl Render {
         })
     }
 
-    pub fn new_entry(params: &Vec<Value>, buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>) -> Box<dyn Module> {
+    pub fn new_entry(params: &Vec<Value>, buffer_cache: Rc<RefCell<HashMap<String, Vec<f32>>>>) -> Box<dyn Module> {
         Render::new(params[0].as_str().unwrap().to_string(), params[1].as_str().unwrap().to_string(), params[2].as_str().unwrap().to_string(), buffer_cache)
     }
 }
 
 impl Module for Render {
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> f32 {
         mdl_cache[&self.rendered_module].tick_sample(mdl_cache, info); 
         let buffer_name = ModuleInfo::rep_name(info, self.buffer_name.clone());
         let file_name = ModuleInfo::rep_name(info, self.file_name.clone());
@@ -40,8 +40,8 @@ impl Module for Render {
         
         for s in samples {
             let amplitude = i16::MAX as f32;
-            writer.write_sample((amplitude * s.val) as i16).unwrap();
+            writer.write_sample((amplitude * s) as i16).unwrap();
         }
-        return Sample::new(0, 0.0); //just because this needs to return a value. this sample value isn't actually intended to be used in any way. 
+        return 0.0; //just because this needs to return a value. this sample value isn't actually intended to be used in any way. 
     }
 }

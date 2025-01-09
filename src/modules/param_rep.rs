@@ -8,8 +8,8 @@ pub struct ParamRep {
     pub increment: f32,
 }
 impl Module for ParamRep {
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
-        Sample::new(info.i, self.starting_value + (self.increment * (info.rep) as f32))
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> f32 {
+        self.starting_value + (self.increment * (info.rep) as f32)
         // + 1 cause rep i zero-based
     }
 }

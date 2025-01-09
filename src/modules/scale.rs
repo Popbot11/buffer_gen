@@ -31,15 +31,15 @@ impl Scale{
     }
 }
 impl Module for Scale {
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
-        let output: Sample = {
-            let signal = mdl_cache[&self.signal].tick_sample(mdl_cache, info).val; 
-            let in_min = mdl_cache[&self.in_min].tick_sample(mdl_cache, info).val;
-            let in_max = mdl_cache[&self.in_max].tick_sample(mdl_cache, info).val;
-            let out_min = mdl_cache[&self.out_min].tick_sample(mdl_cache, info).val;
-            let out_max = mdl_cache[&self.out_max].tick_sample(mdl_cache, info).val;
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> f32 {
+        let output: f32 = {
+            let signal = mdl_cache[&self.signal].tick_sample(mdl_cache, info); 
+            let in_min = mdl_cache[&self.in_min].tick_sample(mdl_cache, info);
+            let in_max = mdl_cache[&self.in_max].tick_sample(mdl_cache, info);
+            let out_min = mdl_cache[&self.out_min].tick_sample(mdl_cache, info);
+            let out_max = mdl_cache[&self.out_max].tick_sample(mdl_cache, info);
             
-            Sample::new(info.i, (signal - in_min)*((out_max-out_min)/(in_max-in_min)) + out_min)
+            (signal - in_min)*((out_max-out_min)/(in_max-in_min)) + out_min
         };
         output
     }
