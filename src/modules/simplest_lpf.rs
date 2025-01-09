@@ -11,7 +11,7 @@ pub struct SimplestLPF {
     pub buff_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>>,
 }
 
-
+    
 impl  Module for SimplestLPF  {
     fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample {
         let signal: Sample = mdl_cache[&self.signal].tick_sample(mdl_cache, info);

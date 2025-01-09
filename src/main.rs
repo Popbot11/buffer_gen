@@ -68,7 +68,7 @@ fn main() {
         // println!("{}", data);
         data.parse::<Table>().unwrap()
     }; 
-    let mut buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>> = Rc::new(RefCell::new(HashMap::new())); 
+    let buffer_cache: Rc<RefCell<HashMap<String, Vec<Sample>>>> = Rc::new(RefCell::new(HashMap::new())); 
     let module_cache: HashMap<String, Box<dyn Module>> = toml_to_hashmap(toml_file, buffer_cache.clone());
         
     go("repeat".to_string(), &module_cache, buffer_cache.clone());

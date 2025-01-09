@@ -5,7 +5,7 @@ use crate::core::sample::Sample;
 
 pub trait Module{
     //&self -- the instance of the respective struct that implements tick_sample
-    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> Sample;
+    fn tick_sample(&self, mdl_cache: &HashMap<String, Box<dyn Module>>, info: ModuleInfo) -> f32;
 }
 impl std::fmt::Display for dyn Module {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
