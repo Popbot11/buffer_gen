@@ -1,7 +1,7 @@
 use std::{collections::HashMap, f32::consts::PI};
 use toml::Value;
 
-use crate::core::{module::{Module, ModuleInfo}, sample::Sample};
+use crate::core::module::{Module, ModuleInfo};
 
 pub struct Sine {
     pub frequency: String

@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use crate::core::{module::{Module, ModuleInfo}, sample::Sample};
+use crate::core::module::{Module, ModuleInfo};
 use text_io::{self, read};
 use toml::Value;
 

@@ -1,7 +1,7 @@
 use std::{cell::RefCell, collections::HashMap, rc::Rc};
 use toml::Value;
 
-use crate::core::{module::{Module, ModuleInfo}, sample::Sample};
+use crate::core::module::{Module, ModuleInfo};
 
 pub struct Buffer {
     pub signal: String,

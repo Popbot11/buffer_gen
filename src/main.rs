@@ -1,6 +1,6 @@
 mod core;
 mod modules;
-use core::{module::{Module, ModuleInfo}, sample::Sample};
+use core::module::{Module, ModuleInfo};
 use std::{cell::RefCell, collections::HashMap, fs::File, io::Read, rc::Rc};
 use modules::{buffer::Buffer, multiply::Multiply, noise::Noise, param::Param, param_rep::ParamRep, pass::Pass, render::Render, repeat::Repeat, scale::Scale, scale_static::ScaleStatic, simplest_lpf::SimplestLPF, sin::Sine};
 use toml::{map::Map, Table, Value};

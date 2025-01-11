@@ -3,7 +3,7 @@
 use std::{cell::RefCell, collections::HashMap, rc::Rc, vec};
 use toml::Value;
 
-use crate::core::{module::{Module, ModuleInfo}, sample::{self, Sample}};
+use crate::core::module::{Module, ModuleInfo};
 
 pub struct SimplestLPF {
     pub signal: String,

@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use toml::Value;
 
-use crate::core::{module::{Module, ModuleInfo}, sample::Sample};
+use crate::core::module::{Module, ModuleInfo};
 
 pub struct ScaleStatic { 
     pub signal: String,

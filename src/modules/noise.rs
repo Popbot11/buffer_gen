@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use toml::Value;
 use rand::prelude::*;
 
-use crate::core::{module::{Module, ModuleInfo}, sample::Sample};
+use crate::core::module::{Module, ModuleInfo};
 
 
 // note for future me: just generates white noise
