@@ -45,6 +45,10 @@ Whatever chain of modules exists above a module of type `"repeat"` is executed n
 
 For each sample, the buffer module asks its parent modle for a sample, which cascades up and down the module tree until the entire buffer is of the required length. 
 
+
 I'm still very new to all of this, so my explination and implementation are both probably not very good. But it's a start; I've got plans for future projects that will hopefully use a lot of the same patterns I came up with for this. 
 
 More info soon hopefully once I have a brek from school to continue working on this. 
+
+i also wrote about this on my website a bit ago, which you can see [here](https://popbot.work/contraptions/buffer-gen.html). 
+also also here's a strange little UI thing that I made for a different project but might try and adapt to this: [module editor](https://popbot.work/contraptions/moduleEditor.html)
